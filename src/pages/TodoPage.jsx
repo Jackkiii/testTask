@@ -5,12 +5,12 @@ import TaskList from "../components/TaskList";
 import SearchTodo from "../components/SearchTodo";
 
 const TodoPage = () => {
-    const [todoList, setTodoList] = useState([])
-    const [changedTodo, setChangedTodo] = useState(null)
-    const [searchInput, setSearchInput] = useState('')
+    const [todoList, setTodoList] = useState([])        //State для хранения заметок
+    const [changedTodo, setChangedTodo] = useState(null)//State для выбора конкретной заметки в списке и для дальнейшей отрисовки EditTask
+    const [searchInput, setSearchInput] = useState('')  //State для инпута поиска заметки по названию
 
 
-    const filteredTodo = (todoList.filter(todoItem => {
+    const filteredTodo = (todoList.filter(todoItem => {          //Функция для поиска заметки по названию
             return todoItem.task.toLowerCase().includes(searchInput.toLowerCase())
     }))
 

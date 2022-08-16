@@ -9,7 +9,7 @@
     flex-direction: row;
     justify-content: space-between;
 
-    .block-task-input, .search-task{
+    .block-task-input{
       margin-bottom: 10px;
       display: flex;
       flex-direction: row;
@@ -28,156 +28,168 @@
         outline: none;
         font-size: 12px;
       }
+    }
+  }
 
-      .btn-new-task, .btn {
-        padding: 3px 3px 4px 3px;
-        font-size: 14px;
-        color: #fff;
-        border: 1px solid #6ab9fd;
-        border-radius: 0 6px 6px 0;
-        box-sizing: border-box;
-        border-left: none;
-        background: #6ab9fd;
+  .search-task{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    input {
+      margin-left: 10px;
+      padding: 6px 20px 6px 6px;
+      border: 1px solid #6ab9fd;
+      box-sizing: border-box;
+      border-radius: 6px;
+      outline: none;
+      font-size: 12px;
+      width: 190px;
+    }
+    .clear-input {
+      position: relative;
+
+      &:after{
+        content: "🞫";
         cursor: pointer;
-        transition: all 0.3s;
+        top: -12px;
+        right: 2px;
+        width: auto;
+        height: auto;
+        position: absolute;
+        font-size: 17px;
       }
     }
-    .search-task{
-      input {
-        margin-left: 10px;
-        padding: 6px 20px 6px 6px;
-        border: 1px solid #6ab9fd;
-        box-sizing: border-box;
-        border-radius: 6px;
-        outline: none;
-        font-size: 12px;
-        width: 190px;
-      }
-      .clear-input {
-        position: relative;
+  }
+}
 
-        &after{
-          content: "🞫";
-          cursor: pointer;
-          top: -12px;
-          right: 2px;
-          width: auto;
-          height: auto;
-          position: absolute;
-          font-size: 17px;
-        }
+.content {
+  width: 800px;
+  min-height: 500px;
+  border: 4px solid #6ab9fd;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  .todo-list{
+    border-right: 4px solid #6ab9fd;
+    box-sizing: border-box;
+    width: 25%;
+    position: relative;
+    min-width: 70px;
+    max-width: 500px;
+    flex-shrink: 0;
+
+    .resizer {
+      position: absolute;
+      cursor: col-resize;
+      height: 100%;
+      right: -4px;
+      top: 0;
+      width: 4px;
+      user-select: none;
+    }
+
+    .todo-list-title {
+      text-align: center;
+      margin: 10px 0 10px;
+    }
+
+    ol {
+      padding: 0;
+
+      .todo-item {
+        margin: 0 0 6px;
+        padding-left: 25px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        list-style: decimal inside;
+        text-indent: -1em;
+        cursor: pointer;
+        color: #808080;
+      }
+
+      .todo-item.inProcess {
+        color: #3386c2;
+      }
+
+      .todo-item.completed {
+        color: #20ff20;
       }
     }
   }
 
-  .content {
-    width: 800px;
-    min-height: 500px;
-    border: 4px solid #6ab9fd;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    position: relative;
+  .edit-task {
+    width: 75%;
 
-    .todo-list{
-      border-right: 4px solid #6ab9fd;
-      box-sizing: border-box;
-      width: 25%;
-      position: relative;
-      min-width: 70px;
-      max-width: 500px;
-      flex-shrink: 0;
-
-      .resizer {
-        position: absolute;
-        cursor: col-resize;
-        height: 100%;
-        right: -4px;
-        top: 0;
-        width: 4px;
-        user-select: none;
-      }
-
-      .todo-list-title, .edit-task-title {
-        text-align: center;
-        margin: 10px 0 10px;
-      }
-
-      ol {
-        padding: 0;
-
-        .todo-item {
-          margin: 0 0 6px;
-          padding-left: 25px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          list-style: decimal inside;
-          text-indent: -1em;
-          cursor: pointer;
-          color: #808080;
-        }
-
-        .todo-item.inProcess {
-          color: #3386c2;
-        }
-
-        .todo-item.completed {
-          color: #20ff20;
-        }
-      }
+    .edit-task-title {
+      text-align: center;
+      margin: 10px 0 10px;
     }
 
-    .edit-task {
-      width: 75%;
+    .edit-block, .select-task-title {
+      margin-left: 10px;
 
-      .edit-task-title
+      p{
+        margin: 0;
+      }
 
-      .edit-block, .select-task-title {
-        margin-left: 10px;
+      .rename {
+        display: flex;
+        flex-direction: row;
+        margin: 8px 0;
 
-        p{
-          margin: 0;
-        }
-
-        .rename {
-          display: flex;
-          flex-direction: row;
-          margin: 8px 0;
-
-          input {
-            padding: 6px;
-            border: 1px solid #6ab9fd;
-            box-sizing: border-box;
-            border-radius: 6px 0 0 6px;
-            outline: none;
-            font-size: 12px;
-          }
-
-          .btn
-        }
-
-        .change-status {
-          display: flex;
-          margin-bottom: 8px;
-
-          .delete-btn, .change-status .btn {
-            border: 1px solid #6ab9fd;
-            border-radius: 6px;
-            display: inline;
-          }
-
-          .inProcess-btn {
-            margin-right: 6px;
-          }
-        }
-
-        .delete-btn, .change-status .btn {
+        input {
+          padding: 6px;
           border: 1px solid #6ab9fd;
-          border-radius: 6px;
-          display: inline;
+          box-sizing: border-box;
+          border-radius: 6px 0 0 6px;
+          outline: none;
+          font-size: 12px;
         }
       }
     }
+
+    .change-status {
+      display: flex;
+      margin-bottom: 8px;
+
+      .inProcess-btn {
+        margin-right: 6px;
+      }
+
+      .delete-btn {
+        border: 1px solid #6ab9fd;
+        border-radius: 6px;
+        display: inline;
+      }
+    }
+
+    .delete-btn, .change-status .btn {
+      border: 1px solid #6ab9fd;
+      border-radius: 6px;
+      display: inline;
+    }
+  }
+}
+
+.btn {
+  padding: 3px 3px 4px 3px;
+  font-size: 14px;
+  color: #fff;
+  border: 1px solid #6ab9fd;
+  border-radius: 0 6px 6px 0;
+  box-sizing: border-box;
+  border-left: none;
+  background: #6ab9fd;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background: #fff;
+    color: #000;
   }
 }

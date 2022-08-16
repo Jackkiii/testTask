@@ -3,9 +3,9 @@ import React from 'react';
 const TodoItem = ({todoListItem, toggleTodo}) => {
     let status
 
-    if(todoListItem.status === 'waiting') {
-        status = ''
-    }
+    if(todoListItem.status === 'waiting') {     //Проверяется какой статус у заметки, чтобы добавить нужный класс для
+        status = ''                             //<li/>. Данный проверка выполняется для отображения цветовой индикации
+    }                                           //статуса заметки в списке TODO
     if(todoListItem.status === 'inProcess') {
         status = 'inProcess'
     }

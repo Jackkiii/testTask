@@ -1,41 +1,45 @@
 import React, {useState} from 'react';
 
 const EditTask = ({todoList, setTodoList, changedTodo, setChangedTodo}) => {
-    const [newName, setNewName] = useState('')
-    const statusName = {
+    const [newName, setNewName] = useState('')  //State для изменения названия заметки
+
+    const statusName = {            //Перевод статусов для отображения в окне редактирования
         waiting: 'В ожидании',
         inProcess: 'В процессе',
         completed: 'Выполнено'
     }
 
-    const deleteTask = () => {
-        setTodoList([...todoList.filter(todo => todo.id !== changedTodo.id)])
-        setChangedTodo(null)
-    }
+    const deleteTask = () => {                                                //Функция удаления заметки
+        setTodoList([...todoList.filter(todo => todo.id !== changedTodo.id)]) //Возвращает массив со всеми объектами, у
+        setChangedTodo(null)                                                  //которых id не совпало с выбранным, тем
+    }                                                                         //самым, выбранная заметка не попадет в
+                                                                              //новый массив
 
-    const inProcessTask = () => {
-        setTodoList([
-            ...todoList.map(todo =>
+    const inProcessTask = () => {   //Функция измения статуса на "В процессе"
+        setTodoList([               //При нажатие на кнопку "Взять в работу" в массиве todoList у объекта с выбранным id
+            ...todoList.map(todo => //поле status заменяется на новое значение "inProcess"
                 todo.id === changedTodo.id ? {...todo, status: 'inProcess'} : {...todo}
             )])
         changedTodo.status = 'inProcess'
     }
 
-    const completedTask = () => {
-        setTodoList([
-            ...todoList.map(todo =>
+    const completedTask = () => {   //Функция измения статуса на "Выполнена"
+        setTodoList([               //При нажатие на кнопку "Выполнено" в массиве todoList у объекта с выбранным id поле
+            ...todoList.map(todo => //status заменяется на новое значение "completed"
                 todo.id === changedTodo.id ? {...todo, status: 'completed'} : {...todo}
                 )])
         changedTodo.status = 'completed'
     }
 
-    const renameTask = () => {
-        setTodoList([
-            ...todoList.map(todo =>
-                todo.id === changedTodo.id ? {...todo, task: newName} : {...todo}
-            )])
-        changedTodo.task = newName
-        setNewName('')
+    const renameTask = () => {     //Функция изменения названия заметки
+        if (newName) {             //В массиве todoList у объекта с выбранным id поле task заменяется на новое значение,
+            setTodoList([          //которое было введено в соответствующий инпут
+                ...todoList.map(todo =>
+                    todo.id === changedTodo.id ? {...todo, task: newName} : {...todo}
+                )])
+            changedTodo.task = newName
+            setNewName('')
+        }
     }
 
     return (

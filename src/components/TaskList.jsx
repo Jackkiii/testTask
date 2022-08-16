@@ -5,40 +5,40 @@ const TaskList = ({todoList, setChangedTodo, filteredTodo}) => {
     const ref = useRef(null)
     const refRight = useRef(null)
 
-    const toggleTodo = (id) => {
-        setChangedTodo(todoList.find(todo => todo.id === id))
-    }
+    const toggleTodo = (id) => {                               //В переменную changedTodo помещается объект, на который
+        setChangedTodo(todoList.find(todo => todo.id === id))  //нажали в списке заметок. Необходимо для отрисовки окна
+    }                                                          //редактирования
 
-    useEffect(() =>{
-      const resizeableEl = ref.current
-      const style = window.getComputedStyle(resizeableEl)
-      let width = parseInt(style.width, 10)
-      let x = 0
+    useEffect(() =>{                                     //Применяется для изменения ширины блока "Списка заметок"
+        const resizeableEl = ref.current
+        const style = window.getComputedStyle(resizeableEl)
+        const maxWidth = parseInt(style.maxWidth, 10)
+        const minWidth = parseInt(style.minWidth, 10)
+        let width = parseInt(style.width, 10)
 
-      const onMouseMoveRightResize = (e) => {
-          const dx = e.clientX - x
-          x = e.clientX
-          width = width + dx
-          resizeableEl.style.width = `${width}px`
-      }
+        const onMouseMoveRightResize = (e) => {     //Событие при передвижении вертикальной полоски. Изменяется ширина
+            const dx = e.movementX
+            width = width + dx
+            resizeableEl.style.width = `${width}px`
+        }
 
-      const onMouseUpRightResize = (e) => {
-          document.removeEventListener("mousemove", onMouseMoveRightResize)
-      }
+        const onMouseUpRightResize = (e) => {       //Событие, когда ЛКМ отпустили.
+            document.removeEventListener("mousemove", onMouseMoveRightResize)
+            if (width > maxWidth) width = maxWidth
+            if (width < minWidth) width = minWidth
+        }
 
-      const onMouseDownRightResize = (e) => {
-          x = e.clientX
-          resizeableEl.style.userSelect = 'none'
-          document.addEventListener("mousemove", onMouseMoveRightResize)
-          document.addEventListener("mouseup", onMouseUpRightResize)
-      }
+        const onMouseDownRightResize = (e) => {     //Событие, когда на ЛКМ нажали.
+            document.addEventListener("mousemove", onMouseMoveRightResize)
+            document.addEventListener("mouseup", onMouseUpRightResize)
+        }
 
-      const resizerRight = refRight.current
-      resizerRight.addEventListener("mousedown", onMouseDownRightResize)
+        const resizerRight = refRight.current
+        resizerRight.addEventListener("mousedown", onMouseDownRightResize)
 
-      return () => {
-          resizerRight.removeEventListener("mousedown",onMouseDownRightResize)
-      }
+        return () => {
+            resizerRight.removeEventListener("mousedown",onMouseDownRightResize)
+        }
     }, [])
 
     return (

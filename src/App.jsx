@@ -1,5 +1,6 @@
 import React from "react";
-import './style/App.css';
+//import './style/Appasd.css';
+import './style/App.scss';
 import TodoPage from "./pages/TodoPage";
 
 function App() {

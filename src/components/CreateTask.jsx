@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
 
 const CreateTask = ({todoList, setTodoList}) => {
-    const [valueInput, setValueInput] = useState('')
+    const [valueInput, setValueInput] = useState('')        //State для инпута новой заметки
 
-    const addTask = () => {
+    const addTask = () => {                                          //Функция создания новой заметки
         if(valueInput){
             const newTaskItem = {
                 id: Math.random()*1000,
                 task: valueInput,
                 status: 'waiting' // waiting, in-process, completed
             }
-            setTodoList([...todoList, newTaskItem])
+            setTodoList([...todoList, newTaskItem])     //Добавление только что созданной заметки в массив
         }
-        setValueInput('')
+        setValueInput('')                         //Очистка инпута
     }
 
-    const pressEnter = (e) => {
-        if (e.key === "Enter"){
+    const pressEnter = (e) => {                                     //Если после ввода названия заметки был нажат ENTER,
+        if (e.key === "Enter"){                                     //тогда также вызывается addTask
             addTask()
         }
     }
@@ -33,7 +33,7 @@ const CreateTask = ({todoList, setTodoList}) => {
                 onChange={e => setValueInput(e.target.value)}
                 onKeyDown={pressEnter}
             />
-            <div className="btn-new-task" onClick={addTask}>
+            <div className="btn" onClick={addTask}>
                 Добавить
             </div>
         </div>
